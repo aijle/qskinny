@@ -97,7 +97,7 @@ struct QskVirtualKeyboardLayouts
 #define LOWER( x ) int( x + 32 ) // Convert an uppercase key to lowercase
 static constexpr const QskVirtualKeyboardLayouts qskKeyboardLayouts =
 {
-#include "QskVirtualKeyboardLayouts.cpp"
+#include "QskVirtualKeyboardLayouts.h"
 };
 #undef LOWER
 
