@@ -1,4 +1,4 @@
-add_library(qskinny)
+add_library(qskinny STATIC)
 
 target_link_libraries(qskinny Qt5::Widgets Qt5::Quick)
 
