@@ -39,7 +39,8 @@
 QSK_NAMESPACE( Qsk )
 {
     QSK_EXPORT QSK_Q_NAMESPACE
-
+    extern QSK_EXPORT const QMetaObject staticMetaObject;
+    
     enum Direction
     {
         LeftToRight,
