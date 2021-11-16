@@ -41,7 +41,9 @@ void QskGraphicNode::setGraphic(
     QskTextureRenderer::RenderMode renderMode, const QRectF& rect,
     Qt::Orientations mirrored )
 {
-    bool isTextureDirty = isNull();
+    auto textureId = QSGSimpleTextureNode::texture();
+
+    bool isTextureDirty = textureId == 0;
 
     QSize textureSize;
 
@@ -60,7 +62,7 @@ void QskGraphicNode::setGraphic(
 
         if ( !isTextureDirty )
         {
-            const auto oldRect = QskTextureNode::rect();
+            const auto oldRect = this->rect();
             isTextureDirty = ( rect.width() != static_cast< int >( oldRect.width() ) ) ||
                 ( rect.height() != static_cast< int >( oldRect.height() ) );
         }
@@ -73,13 +75,21 @@ void QskGraphicNode::setGraphic(
         isTextureDirty = true;
     }
 
-    auto textureId = QskTextureNode::textureId();
-
     if ( isTextureDirty )
     {
         textureId = QskTextureRenderer::createTextureFromGraphic(
+            window,
             renderMode, textureSize, graphic, colorFilter, Qt::IgnoreAspectRatio );
     }
 
-    QskTextureNode::setTexture( window, rect, textureId, mirrored );
+    setOwnsTexture(true);
+    setRect(rect);
+    if (mirrored == Qt::Horizontal) {
+        setTextureCoordinatesTransform(QSGSimpleTextureNode::MirrorHorizontally);
+    } else if (mirrored == Qt::Vertical) {
+        setTextureCoordinatesTransform(QSGSimpleTextureNode::MirrorVertically);
+    } else {
+        setTextureCoordinatesTransform(QSGSimpleTextureNode::NoTransform);
+    }
+    setTexture( textureId );
 }

@@ -6,10 +6,10 @@
 #ifndef QSK_PAINTED_NODE_H
 #define QSK_PAINTED_NODE_H
 
-#include "QskTextureNode.h"
 #include "QskTextureRenderer.h"
+#include <QSGSimpleTextureNode>
 
-class QSK_EXPORT QskPaintedNode : public QskTextureNode
+class QSK_EXPORT QskPaintedNode : public QSGSimpleTextureNode
 {
   public:
     QskPaintedNode();
@@ -26,9 +26,6 @@ class QSK_EXPORT QskPaintedNode : public QskTextureNode
 
   private:
     class PaintHelper;
-
-    void setTexture( QQuickWindow*,
-        const QRectF&, uint id, Qt::Orientations ) = delete;
 
     uint m_hash;
 };

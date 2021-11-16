@@ -224,6 +224,19 @@ QSGNode* QskSkinlet::updateBackgroundNode(
     if ( !gradient.isValid() )
         return nullptr;
 
+    if (gradient.isMonochrome()) {
+        auto rectNode = static_cast< QSGSimpleRectNode* >( node );
+        if ( rectNode == nullptr )
+        {
+            rectNode = new QSGSimpleRectNode();
+            auto color = gradient.colorAt(0);
+
+            rectNode->setColor(color);
+            rectNode->setRect( rect );
+        }
+        return rectNode;
+    }
+
     auto boxNode = static_cast< QskBoxNode* >( node );
     if ( boxNode == nullptr )
         boxNode = new QskBoxNode();

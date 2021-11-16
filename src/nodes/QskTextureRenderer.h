@@ -42,14 +42,12 @@ namespace QskTextureRenderer
         virtual void paint( QPainter*, const QSize& ) = 0;
     };
 
-    QSK_EXPORT uint createTexture( RenderMode, const QSize&, PaintHelper* );
+    QSK_EXPORT QSGTexture * createTexture(QQuickWindow* window, RenderMode, const QSize&, PaintHelper* );
 
-    QSK_EXPORT uint createTextureFromGraphic(
+    QSK_EXPORT QSGTexture * createTextureFromGraphic(
+        QQuickWindow* window,
         RenderMode, const QSize&, const QskGraphic&,
         const QskColorFilter&, Qt::AspectRatioMode );
-
-    QSK_EXPORT QSGTexture* textureFromId(
-        QQuickWindow*, uint textureId, const QSize& );
 }
 
 #endif

@@ -7,13 +7,13 @@
 #define QSK_GRAPHIC_NODE_H
 
 #include "QskTextureRenderer.h"
-#include "QskTextureNode.h"
+#include <QSGSimpleTextureNode>
 
 class QskGraphic;
 class QskColorFilter;
 class QQuickWindow;
 
-class QSK_EXPORT QskGraphicNode : public QskTextureNode
+class QSK_EXPORT QskGraphicNode : public QSGSimpleTextureNode
 {
   public:
     QskGraphicNode();
@@ -25,8 +25,6 @@ class QSK_EXPORT QskGraphicNode : public QskTextureNode
         Qt::Orientations mirrored = Qt::Orientations() );
 
   private:
-    void setTexture( QQuickWindow*,
-        const QRectF&, uint id, Qt::Orientations ) = delete;
 
     uint m_hash;
 };
